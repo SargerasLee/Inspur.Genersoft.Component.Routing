@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inspur.Genersoft.Component.Routing", "Inspur.Genersoft.Component.Routing\Inspur.Genersoft.Component.Routing.csproj", "{D40803D6-676F-4A2A-BF63-3B061527700B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inspur.Genersoft.Component.Config", "Inspur.Genersoft.Component.Config\Inspur.Genersoft.Component.Config.csproj", "{5DDB1B1A-87EA-4E8D-B41F-5986C2085AF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inspur.Genersoft.Component.Logging", "Inspur.Genersoft.Component.Logging\Inspur.Genersoft.Component.Logging.csproj", "{0F1E9770-1B1C-4817-ADAF-9CA87A817DEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inspur.Genersoft.Component.UnitTest", "Inspur.Genersoft.Component.UnitTest\Inspur.Genersoft.Component.UnitTest.csproj", "{B2419846-7681-49A7-9667-1D78C5563A26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{D40803D6-676F-4A2A-BF63-3B061527700B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D40803D6-676F-4A2A-BF63-3B061527700B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D40803D6-676F-4A2A-BF63-3B061527700B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DDB1B1A-87EA-4E8D-B41F-5986C2085AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DDB1B1A-87EA-4E8D-B41F-5986C2085AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DDB1B1A-87EA-4E8D-B41F-5986C2085AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DDB1B1A-87EA-4E8D-B41F-5986C2085AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F1E9770-1B1C-4817-ADAF-9CA87A817DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1E9770-1B1C-4817-ADAF-9CA87A817DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F1E9770-1B1C-4817-ADAF-9CA87A817DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F1E9770-1B1C-4817-ADAF-9CA87A817DEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2419846-7681-49A7-9667-1D78C5563A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2419846-7681-49A7-9667-1D78C5563A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2419846-7681-49A7-9667-1D78C5563A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2419846-7681-49A7-9667-1D78C5563A26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

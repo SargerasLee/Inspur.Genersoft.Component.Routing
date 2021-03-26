@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <Modules>
+    <Properties>
+      <Property Code="zj" Value="interface" Name=""/>
+      <Property Code="fy" Value="api" Name=""/>
+      <Property Code="jj" Value="ww" Name=""/>
+    </Properties>
+    <Component-Scan>
+      <Assembly Name="Tools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+      <Assembly Name="Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+    </Component-Scan>
+    <Log>
+      <Type Code="ZJ" Name="资金日志" FullPath="c:\log\zjlog\" Assembly="Tools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Class="Tools.Log.CommonLogger" Level="INFO"/>
+      <Type Code="YS" Name="应收日志" FullPath="c:\log\arlog\" Assembly="" Class="" Level="DEBUG"/>
+      <Type Code="FY" Name="费用日志" FullPath="c:\log\fylog\" Assembly="" Class="" Level="ALL"/>      
+    </Log>
+  </Modules>
+</Configuration>
+
+<!--Code 日志编号-->
+<!--Name 日志名称，给人看-->
+<!--FullPath 日志文件路径，不带文件名-->
+<!--Assembly 程序集强名称，带公钥-->
+<!--Class 类全限定名-->
+<!--Level 日志级别由低到高ALL,TRACE,DEBUG,INFO,WARN,ERROR,FATAL,OFF-->
