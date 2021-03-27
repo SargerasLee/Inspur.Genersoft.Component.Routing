@@ -60,17 +60,17 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Inspur.Genersoft.Component.Config\Inspur.Genersoft.Component.Config.csproj">
+    <ProjectReference Include="..\Inspur.Genersoft.Component.Config\Open.Genersoft.Component.Config.csproj">
       <Project>{5ddb1b1a-87ea-4e8d-b41f-5986c2085af5}</Project>
-      <Name>Inspur.Genersoft.Component.Config</Name>
+      <Name>Open.Genersoft.Component.Config</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Inspur.Genersoft.Component.Logging\Inspur.Genersoft.Component.Logging.csproj">
+    <ProjectReference Include="..\Inspur.Genersoft.Component.Logging\Open.Genersoft.Component.Logging.csproj">
       <Project>{0f1e9770-1b1c-4817-adaf-9ca87a817dec}</Project>
-      <Name>Inspur.Genersoft.Component.Logging</Name>
+      <Name>Open.Genersoft.Component.Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Inspur.Genersoft.Component.Routing\Inspur.Genersoft.Component.Routing.csproj">
+    <ProjectReference Include="..\Inspur.Genersoft.Component.Routing\Open.Genersoft.Component.Routing.csproj">
       <Project>{d40803d6-676f-4a2a-bf63-3b061527700b}</Project>
-      <Name>Inspur.Genersoft.Component.Routing</Name>
+      <Name>Open.Genersoft.Component.Routing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

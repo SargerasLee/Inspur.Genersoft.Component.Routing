@@ -1,9 +1,9 @@
-﻿using Inspur.Genersoft.Component.Routing.Core;
-using Inspur.Genersoft.Component.Routing.Exceptions;
+﻿using Open.Genersoft.Component.Routing.Core;
+using Open.Genersoft.Component.Routing.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Inspur.Genersoft.Component.Routing.Public
+namespace Open.Genersoft.Component.Routing.Public
 {
 	internal class ComponentDispatcher
 	{

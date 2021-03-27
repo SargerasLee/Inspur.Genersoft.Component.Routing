@@ -1,12 +1,12 @@
-﻿using Inspur.Genersoft.Component.Config.Events;
-using Inspur.Genersoft.Component.Config.Global;
-using Inspur.Genersoft.Component.Routing.Attributes;
+﻿using Open.Genersoft.Component.Config.Events;
+using Open.Genersoft.Component.Config.Global;
+using Open.Genersoft.Component.Routing.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Inspur.Genersoft.Component.Routing.Core
+namespace Open.Genersoft.Component.Routing.Core
 {
 	internal class CustomComponentContainer
 	{

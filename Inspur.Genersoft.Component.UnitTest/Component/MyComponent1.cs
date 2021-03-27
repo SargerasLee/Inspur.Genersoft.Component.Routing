@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Inspur.Genersoft.Component.Routing;
-using Inspur.Genersoft.Component.Routing.Attributes;
-using Inspur.Genersoft.Component.Routing.Core;
+using Open.Genersoft.Component.Routing;
+using Open.Genersoft.Component.Routing.Attributes;
+using Open.Genersoft.Component.Routing.Core;
 
-namespace Inspur.Genersoft.Component.UnitTest.Component
+namespace Open.Genersoft.Component.UnitTest.Component
 {
 	[CustomComponent]
 	[RouteMapping("/test/comp1")]

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inspur.Genersoft.Component.Config.Exceptions
+namespace Open.Genersoft.Component.Config.Exceptions
 {
 	public class ConfigNotFoundException : Exception
 	{

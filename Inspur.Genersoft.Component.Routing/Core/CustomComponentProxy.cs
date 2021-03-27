@@ -1,11 +1,11 @@
-﻿using Inspur.Genersoft.Component.Routing.Attributes;
-using Inspur.Genersoft.Component.Routing.Exceptions;
+﻿using Open.Genersoft.Component.Routing.Attributes;
+using Open.Genersoft.Component.Routing.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace Inspur.Genersoft.Component.Routing.Core
+namespace Open.Genersoft.Component.Routing.Core
 {
 	internal class CustomComponentProxy
 	{

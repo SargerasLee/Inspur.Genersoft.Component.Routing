@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inspur.Genersoft.Component.Routing.Exceptions
+namespace Open.Genersoft.Component.Routing.Exceptions
 {
 	public class RouteNotMatchException : Exception
 	{

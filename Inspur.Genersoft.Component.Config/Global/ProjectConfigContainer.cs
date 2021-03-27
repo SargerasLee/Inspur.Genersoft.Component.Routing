@@ -1,13 +1,13 @@
-﻿using Inspur.Genersoft.Component.Config.Delegates;
-using Inspur.Genersoft.Component.Config.Entity;
-using Inspur.Genersoft.Component.Config.Events;
-using Inspur.Genersoft.Component.Config.Exceptions;
+﻿using Open.Genersoft.Component.Config.Delegates;
+using Open.Genersoft.Component.Config.Entity;
+using Open.Genersoft.Component.Config.Events;
+using Open.Genersoft.Component.Config.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-namespace Inspur.Genersoft.Component.Config.Global
+namespace Open.Genersoft.Component.Config.Global
 {
 	public static class ProjectConfigContainer
 	{

@@ -1,4 +1,4 @@
-﻿namespace Inspur.Genersoft.Component.Routing.Public.Spi
+﻿namespace Open.Genersoft.Component.Routing.Public.Spi
 {
 	public class Router
 	{

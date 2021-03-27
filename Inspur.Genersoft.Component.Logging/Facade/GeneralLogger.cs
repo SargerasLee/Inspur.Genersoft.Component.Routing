@@ -1,8 +1,8 @@
-﻿using Inspur.Genersoft.Component.Logging.Default;
+﻿using Open.Genersoft.Component.Logging.Default;
 using System;
 using System.Collections.Generic;
 
-namespace Inspur.Genersoft.Component.Logging.Facade
+namespace Open.Genersoft.Component.Logging.Facade
 {
 	public abstract class GeneralLogger
 	{

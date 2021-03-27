@@ -1,12 +1,12 @@
-﻿using Inspur.Genersoft.Component.Config.Entity;
-using Inspur.Genersoft.Component.Config.Global;
-using Inspur.Genersoft.Component.Logging.Default;
-using Inspur.Genersoft.Component.Logging.Facade;
+﻿using Open.Genersoft.Component.Config.Entity;
+using Open.Genersoft.Component.Config.Global;
+using Open.Genersoft.Component.Logging.Default;
+using Open.Genersoft.Component.Logging.Facade;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Inspur.Genersoft.Component.Logging.Factory
+namespace Open.Genersoft.Component.Logging.Factory
 {
 	public class LoggerFactory
 	{

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inspur.Genersoft.Component.Config.Events
+namespace Open.Genersoft.Component.Config.Events
 {
 	public class FileChangedEvent : EventArgs
 	{

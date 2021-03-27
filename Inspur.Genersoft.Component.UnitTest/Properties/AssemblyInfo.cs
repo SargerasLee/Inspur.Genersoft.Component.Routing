@@ -2,11 +2,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Inspur.Genersoft.Component.UnitTest")]
+[assembly: AssemblyTitle("Open.Genersoft.Component.UnitTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Inspur.Genersoft.Component.UnitTest")]
+[assembly: AssemblyProduct("Open.Genersoft.Component.UnitTest")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Inspur.Genersoft.Component.Routing.Exceptions
+namespace Open.Genersoft.Component.Routing.Exceptions
 {
 	public class BusinessLogicException : Exception
 	{

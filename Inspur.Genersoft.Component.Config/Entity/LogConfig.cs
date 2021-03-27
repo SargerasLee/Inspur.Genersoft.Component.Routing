@@ -1,4 +1,4 @@
-﻿namespace Inspur.Genersoft.Component.Config.Entity
+﻿namespace Open.Genersoft.Component.Config.Entity
 {
 	public class LogConfig
 	{

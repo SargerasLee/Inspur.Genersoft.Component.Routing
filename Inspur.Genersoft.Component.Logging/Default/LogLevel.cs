@@ -1,4 +1,4 @@
-﻿namespace Inspur.Genersoft.Component.Logging.Default
+﻿namespace Open.Genersoft.Component.Logging.Default
 {
 	public enum LogLevel
 	{

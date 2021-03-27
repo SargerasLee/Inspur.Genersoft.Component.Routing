@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Inspur.Genersoft.Component.Routing.Core
+namespace Open.Genersoft.Component.Routing.Core
 {
 	public class RouteContext
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Inspur.Genersoft.Component.Routing.Attributes
+namespace Open.Genersoft.Component.Routing.Attributes
 {
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
 	public class CustomComponentAttribute : Attribute

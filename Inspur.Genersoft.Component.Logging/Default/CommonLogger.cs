@@ -1,4 +1,4 @@
-﻿using Inspur.Genersoft.Component.Logging.Facade;
+﻿using Open.Genersoft.Component.Logging.Facade;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 
-namespace Inspur.Genersoft.Component.Logging.Default
+namespace Open.Genersoft.Component.Logging.Default
 {
 	public class CommonLogger : GeneralLogger
 	{
