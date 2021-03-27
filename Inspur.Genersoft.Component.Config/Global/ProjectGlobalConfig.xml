@@ -7,8 +7,7 @@
       <Property Code="jj" Value="ww" Name=""/>
     </Properties>
     <Component-Scan>
-      <Assembly Name="Tools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
-      <Assembly Name="Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+      <Assembly Name="Inspur.Genersoft.Component.UnitTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
     </Component-Scan>
     <Log>
       <Type Code="ZJ" Name="资金日志" FullPath="c:\log\zjlog\" Assembly="Tools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Class="Tools.Log.CommonLogger" Level="INFO"/>
