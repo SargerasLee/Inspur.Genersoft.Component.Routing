@@ -51,7 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Inspur.Genersoft.Component.Config\Open.Genersoft.Component.Config.csproj">
+    <ProjectReference Include="..\Open.Genersoft.Component.Config\Open.Genersoft.Component.Config.csproj">
       <Project>{5ddb1b1a-87ea-4e8d-b41f-5986c2085af5}</Project>
       <Name>Open.Genersoft.Component.Config</Name>
     </ProjectReference>
