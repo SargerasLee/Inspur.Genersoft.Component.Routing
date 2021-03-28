@@ -2,11 +2,23 @@
 {
 	public class LogConfig
 	{
-		public string Code { get; set; }
-		public string Name { get; set; }
-		public string FullPath { get; set; }
-		public string Assembly { get; set; }
-		public string Class { get; set; }
-		public string Level { get; set; }
+		public string Code { get; }
+		public string Name { get; }
+		public string Path { get; }
+		public string Assembly { get; }
+		public string Class { get; }
+		public string Level { get; }
+		public string TimePattern{ get; }
+
+		public LogConfig(string code, string name, string path, string assembly,string clazz, string level, string timePattern)
+		{
+			Code = code;
+			Name = name;
+			Path = path;
+			Assembly = assembly;
+			Class = clazz;
+			Level = level;
+			TimePattern = timePattern;
+		}
 	}
 }

@@ -9,28 +9,17 @@ using System.Xml;
 
 namespace Open.Genersoft.Component.Config.Global
 {
-	public static class ProjectConfigContainer
+	public static class ProjectConfigLoader
 	{
 		public static event ConfigFileChangedEventHandler ConfigFileChanged;
 		private static readonly object obj = new object();
-		private const string PATH = "Global/ProjectGlobalConfig.xml";
+		private const string PATH = "GlobalConfig/ProjectGlobalConfig.xml";
 		private static bool flag = false;
 		private static DateTime lastModifyTime = DateTime.MinValue;
 
 		private static readonly Dictionary<string, string> Properties = new Dictionary<string, string>();
 		private static readonly List<string> Assemblies = new List<string>();
 		private static readonly Dictionary<string, LogConfig> LoggerConfig = new Dictionary<string, LogConfig>();
-
-		internal class Modules
-		{
-			public object this[string index]
-			{
-				get
-				{
-					return null;
-				}
-			}
-		}
 
 		private static void Load()
 		{
@@ -53,17 +42,15 @@ namespace Open.Genersoft.Component.Config.Global
 			foreach (XmlNode item in list)
 			{
 				LoggerConfig.Add(item.Attributes["Code"].Value, new LogConfig
-				(
-					item.Attributes["Code"] == null ? "":item.Attributes["Code"].Value,
-					item.Attributes["Name"] == null ? "" : item.Attributes["Name"].Value,
-					item.Attributes["Path"] == null ? "" : item.Attributes["Path"].Value,
-					item.Attributes["Assembly"] == null ? "" : item.Attributes["Assembly"].Value,
-					item.Attributes["Class"] == null ? "" : item.Attributes["Class"].Value,
-					item.Attributes["Level"] == null ? "" : item.Attributes["Level"].Value,
-					item.Attributes["TimePattern"] == null ? "" : item.Attributes["TimePattern"].Value
-				));
+				{
+					Code = item.Attributes["Code"].Value,
+					Assembly = item.Attributes["Assembly"].Value,
+					Class = item.Attributes["Class"].Value,
+					FullPath = item.Attributes["FullPath"].Value,
+					Level = item.Attributes["Level"].Value,
+					Name = item.Attributes["Name"].Value
+				});
 			}
-			LoggerConfig.Add("default", new LogConfig("", "", "", "", "", "", ""));
 		}
 
 		private static void PutAssemblies(XmlDocument xd)
@@ -121,7 +108,7 @@ namespace Open.Genersoft.Component.Config.Global
 						DateTime before = lastModifyTime;
 						flag = false;
 						Load();
-						ConfigFileChanged?.Invoke(typeof(ProjectConfigContainer), new FileChangedEvent
+						ConfigFileChanged?.Invoke(typeof(ProjectConfigLoader), new FileChangedEvent
 						{
 							ConfigFileName = "ProjectGlobalConfig.xml",
 							ConfigFilePath = PATH,

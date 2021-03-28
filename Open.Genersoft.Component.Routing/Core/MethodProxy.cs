@@ -1,6 +1,7 @@
 ﻿using Open.Genersoft.Component.Routing.Attributes;
 using Open.Genersoft.Component.Routing.Exceptions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -25,29 +26,37 @@ namespace Open.Genersoft.Component.Routing.Core
 			}
 		}
 
-		public object Invoke(Dictionary<string, string> urlParams, Dictionary<string, string> routeParams, params object[] objs)
+		public object Invoke(Dictionary<string, string> urlParams, Dictionary<string, string> routeParams, object objs)
 		{
 			object[] paramObjects = null;
-			RouteContext context = new RouteContext(urlParams, routeParams, objs);
+			JObject jObject = JObject.Parse(objs.ToString());
 			if (parametersCount > 0)
 			{
 				paramObjects = new object[parametersCount];
 			}
-			Dictionary<Type, Dictionary<string, string>> paramDict = new Dictionary<Type, Dictionary<string, string>>();
-			paramDict.Add(typeof(UrlParamAttribute), urlParams);
-			paramDict.Add(typeof(RouteParamAttribute), routeParams);
+			Dictionary<Type, Dictionary<string, string>> paramDict = new Dictionary<Type, Dictionary<string, string>>
+			{
+				{ typeof(UrlParamAttribute), urlParams },
+				{ typeof(RouteParamAttribute), routeParams }
+			};
 			if (urlParams != null && urlParams.Count > 0 || routeParams != null && routeParams.Count > 0)
 			{
 				for (int i = 0; i < parametersCount; i++)
 				{
 					if (parametersDict[i].ParameterType == typeof(RouteContext))
 					{
-						paramObjects[i] = context;
+						paramObjects[i] = new RouteContext(urlParams, routeParams, objs);
 						continue;
 					}
 
 					AssembleParam<UrlParamAttribute>(paramDict, paramObjects, i);
 					AssembleParam<RouteParamAttribute>(paramDict, paramObjects, i);
+
+					if(jObject.ContainsKey(parametersDict[i].Name))
+					{
+						Type t = parametersDict[i].ParameterType;
+						paramObjects[i] = JsonConvert.DeserializeObject(jObject[parametersDict[i].Name].ToString(), t);
+					}				
 				}
 			}
 

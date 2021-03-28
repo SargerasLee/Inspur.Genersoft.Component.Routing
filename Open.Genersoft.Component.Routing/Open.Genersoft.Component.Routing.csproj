@@ -7,8 +7,8 @@
     <ProjectGuid>{D40803D6-676F-4A2A-BF63-3B061527700B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Inspur.Genersoft.Component.Routing</RootNamespace>
-    <AssemblyName>Inspur.Genersoft.Component.Routing</AssemblyName>
+    <RootNamespace>Open.Genersoft.Component.Routing</RootNamespace>
+    <AssemblyName>Open.Genersoft.Component.Routing</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -53,6 +53,7 @@
     <Compile Include="Core\CustomComponentContainer.cs" />
     <Compile Include="Core\CustomComponentProxy.cs" />
     <Compile Include="Core\MethodProxy.cs" />
+    <Compile Include="Core\RegexPattern.cs" />
     <Compile Include="Core\RouteContext.cs" />
     <Compile Include="Exceptions\BusinessLogicException.cs" />
     <Compile Include="Exceptions\RouteNotMatchException.cs" />

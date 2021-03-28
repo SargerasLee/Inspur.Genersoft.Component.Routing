@@ -7,8 +7,8 @@
     <ProjectGuid>{5DDB1B1A-87EA-4E8D-B41F-5986C2085AF5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Inspur.Genersoft.Component.Config</RootNamespace>
-    <AssemblyName>Inspur.Genersoft.Component.Config</AssemblyName>
+    <RootNamespace>Open.Genersoft.Component.Config</RootNamespace>
+    <AssemblyName>Open.Genersoft.Component.Config</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -49,7 +49,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global\ProjectGlobalConfig.xml" />
+    <Content Include="Global\ProjectGlobalConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

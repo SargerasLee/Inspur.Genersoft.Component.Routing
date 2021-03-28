@@ -8,13 +8,13 @@ namespace Open.Genersoft.Component.Routing.Core
 
 		public Dictionary<string, string> RouteParams { get; }
 
-		public object[] Objects { get; }
+		public object MethodParams { get; }
 
-		public RouteContext(Dictionary<string, string> urlParams, Dictionary<string, string> routeParams, object[] objs)
+		public RouteContext(Dictionary<string, string> urlParams, Dictionary<string, string> routeParams, object objs)
 		{
 			UrlParams = urlParams;
 			RouteParams = routeParams;
-			Objects = objs;
+			MethodParams = objs;
 		}
 	}
 }

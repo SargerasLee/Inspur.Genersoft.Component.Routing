@@ -23,8 +23,13 @@ namespace Open.Genersoft.Component.Logging.Factory
 			{"TRACE",LogLevel.TRACE },
 			{"ALL",LogLevel.ALL }
 		};
-		private static readonly string DefaultClass = typeof(CommonLogger).FullName;
-		private static readonly string DefaultAssembly = typeof(CommonLogger).Assembly.FullName;
+		private static readonly string DefaultClass = typeof(DefaultLogger).FullName;
+		private static readonly string DefaultAssembly = typeof(DefaultLogger).Assembly.FullName;
+		private const string DefaultTimePattern = "HH : mm : ss : fff";
+		private const string DefaultLevel = "ALL";
+		private const string DefaultCode = "default";
+		private const string DefaultName = "default";
+		private const string DefaultPath = "c:\\log\\default";
 
 		private LoggerFactory() { }
 
@@ -32,41 +37,47 @@ namespace Open.Genersoft.Component.Logging.Factory
 
 		private GeneralLogger Bulid(string code)
 		{
-			Dictionary<string, object> module = GetModuleConfig(code);
+			Dictionary<string, string> module = GetModuleConfig(code);
 			GeneralLogger logger = CreateLogger(module);
 			PutCache(code, logger);
 			return logDict[code];
 		}
 
-		public GeneralLogger GetLogger(string moduleCode)
+		public GeneralLogger GetLogger(string code)
 		{
-			if (logDict.ContainsKey(moduleCode))
+			if (logDict.ContainsKey(code))
 			{
-				return logDict[moduleCode];
+				return logDict[code];
 			}
 			else
 			{
-				return Bulid(moduleCode);
+				return Bulid(code);
 			}
 		}
-		private Dictionary<string, object> GetModuleConfig(string code)
+		private Dictionary<string, string> GetModuleConfig(string code)
 		{
-			Dictionary<string, object> module = new Dictionary<string, object>(4);
+			Dictionary<string, string> module = new Dictionary<string, string>(7);
 			LogConfig config = ProjectConfigContainer.GetLogConfig(code);
-			module["path"] = config.FullPath;
+			module["code"] = string.IsNullOrWhiteSpace(config.Code) ? DefaultCode : config.Code;
+			module["name"] = string.IsNullOrWhiteSpace(config.Name) ? DefaultName : config.Name;
+			module["path"] = string.IsNullOrWhiteSpace(config.Path) ? DefaultPath : config.Path;
 			module["className"] = string.IsNullOrWhiteSpace(config.Class) ? DefaultClass : config.Class;
 			module["assembly"] = string.IsNullOrWhiteSpace(config.Assembly) ? DefaultAssembly : config.Assembly;
-			module["logLevel"] = levelDict[config.Level];
+			module["logLevel"] = string.IsNullOrWhiteSpace(config.Level) ? DefaultLevel : config.Level;
+			module["timePattern"] = string.IsNullOrWhiteSpace(config.TimePattern) ? DefaultTimePattern : config.TimePattern;
 
 			return module;
 		}
 
-		private GeneralLogger CreateLogger(Dictionary<string, object> module)
+		private GeneralLogger CreateLogger(Dictionary<string, string> module)
 		{
 			Type t = Assembly.Load(module["assembly"].ToString()).GetType(module["className"].ToString());
 			GeneralLogger logger = Activator.CreateInstance(t) as GeneralLogger;
-			logger.Directory = module["path"].ToString();
-			logger.Level = (LogLevel)module["logLevel"];
+			logger.Code = module["code"];
+			logger.Name = module["name"];
+			logger.Path = module["path"];
+			logger.Level = levelDict[module["logLevel"]];
+			logger.TimePattern = module["timePattern"];
 			return logger;
 		}
 

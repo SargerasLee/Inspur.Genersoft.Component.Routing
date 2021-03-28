@@ -10,14 +10,13 @@
       <Assembly Name="Open.Genersoft.Component.UnitTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
     </Component-Scan>
     <Log>
-      <Type Code="ZJ" Name="资金日志" FullPath="c:\log\zjlog\" Assembly="Tools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Class="Tools.Log.CommonLogger" Level="INFO"/>
-      <Type Code="YS" Name="应收日志" FullPath="c:\log\arlog\" Assembly="" Class="" Level="DEBUG"/>
-      <Type Code="FY" Name="费用日志" FullPath="c:\log\fylog\" Assembly="" Class="" Level="ALL"/>      
+      <Type Code="ZJ" Name="资金日志" Path="c:\log\zjlog\" TimePattern="HH : mm : ss : ffffff" Assembly="" Class="" Level="ALL"/>
+      <Type Code="YS" Name="应收日志" Path="c:\log\arlog\" TimePattern="" Assembly="" Class="" Level="DEBUG"/>
     </Log>
   </Modules>
 </Configuration>
 
-<!--Code 日志编号-->
+<!--Code 日志编号,不要用default，系统已预置，可直接使用-->
 <!--Name 日志名称，给人看-->
 <!--FullPath 日志文件路径，不带文件名-->
 <!--Assembly 程序集强名称，带公钥-->

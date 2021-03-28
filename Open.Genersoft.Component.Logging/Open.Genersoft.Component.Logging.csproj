@@ -7,8 +7,8 @@
     <ProjectGuid>{0F1E9770-1B1C-4817-ADAF-9CA87A817DEC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Inspur.Genersoft.Component.Logging</RootNamespace>
-    <AssemblyName>Inspur.Genersoft.Component.Logging</AssemblyName>
+    <RootNamespace>Open.Genersoft.Component.Logging</RootNamespace>
+    <AssemblyName>Open.Genersoft.Component.Logging</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -44,9 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Default\CommonLogger.cs" />
+    <Compile Include="Default\DefaultLogger.cs" />
+    <Compile Include="Default\LoggerDecorator.cs" />
     <Compile Include="Default\LogLevel.cs" />
     <Compile Include="Facade\GeneralLogger.cs" />
+    <Compile Include="Facade\ILogger.cs" />
     <Compile Include="Factory\LoggerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

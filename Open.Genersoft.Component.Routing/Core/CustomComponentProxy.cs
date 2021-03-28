@@ -17,9 +17,6 @@ namespace Open.Genersoft.Component.Routing.Core
 		private readonly List<string> constUrls = new List<string>();
 		private readonly List<string> routeUrls = new List<string>();
 
-		private const string constUrlPattern = "(/\\w+)+";
-		private const string routeUrlPattern = "(/\\w+)*(/{\\w+})+";
-		private const string routeParamPattern = "{\\w+}";
 
 		public CustomComponentProxy(object comp, string id)
 		{
@@ -35,15 +32,15 @@ namespace Open.Genersoft.Component.Routing.Core
 				{
 					value = routeMapping.Value;
 					MethodDict.Add(value, new MethodProxy(realCustomComponent, info));
-					if (Regex.IsMatch(value, constUrlPattern))
+					if (Regex.IsMatch(value, RegexPattern.ConstUrlPattern))
 						constUrls.Add(value);
-					if (Regex.IsMatch(value, routeUrlPattern))
+					if (Regex.IsMatch(value, RegexPattern.RouteUrlPattern))
 						routeUrls.Add(value);
 				}
 			}
 		}
 
-		public object Invoke(string route, params object[] objs)
+		public object Invoke(string route, object obj)
 		{
 			route = route.Trim();
 			string url = route, kv = string.Empty;
@@ -57,19 +54,19 @@ namespace Open.Genersoft.Component.Routing.Core
 			Dictionary<string, string> urlParams = ExtractUrlParams(kv);
 			Dictionary<string, string> routeParams = ExtractRouteParams(url, target);
 
-			object o = MethodDict[target].Invoke(urlParams, routeParams, objs);
+			object o = MethodDict[target].Invoke(urlParams, routeParams, obj);
 			return o;
 		}
 
 		private Dictionary<string, string> ExtractRouteParams(string url, string target)
 		{
-			if (!Regex.IsMatch(target, routeParamPattern))
+			if (!Regex.IsMatch(target, RegexPattern.RouteParamPattern))
 				return null;
 
 			url = url.IndexOf('/', url.Length - 1) < 0 ? url + "/" : url;//最后一位补一个/
 			target = target.IndexOf('/', target.Length - 1) < 0 ? target + "/" : url;//最后一位补一个/
 
-			MatchCollection mc = Regex.Matches(target, routeParamPattern);
+			MatchCollection mc = Regex.Matches(target, RegexPattern.RouteParamPattern);
 			Dictionary<string, string> routeParamDict = new Dictionary<string, string>();
 
 			string key, value;

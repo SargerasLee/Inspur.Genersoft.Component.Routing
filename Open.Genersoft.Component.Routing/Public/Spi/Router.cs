@@ -2,7 +2,7 @@
 {
 	public class Router
 	{
-		public static object Routing(string route, params object[] objects)
+		public static object Routing(string route, object objects)
 		{
 			return ComponentDispatcher.Instance.Dispatch(route, objects);
 		}
