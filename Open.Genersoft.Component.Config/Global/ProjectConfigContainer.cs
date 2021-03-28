@@ -21,16 +21,16 @@ namespace Open.Genersoft.Component.Config.Global
 		private static readonly List<string> Assemblies = new List<string>();
 		private static readonly Dictionary<string, LogConfig> LoggerConfig = new Dictionary<string, LogConfig>();
 
-		internal class Modules
-		{
-			public object this[string index]
-			{
-				get
-				{
-					return null;
-				}
-			}
-		}
+		//internal class Modules
+		//{
+		//	public object this[string index]
+		//	{
+		//		get
+		//		{
+		//			return null;
+		//		}
+		//	}
+		//}
 
 		private static void Load()
 		{

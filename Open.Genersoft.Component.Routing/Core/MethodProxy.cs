@@ -29,7 +29,9 @@ namespace Open.Genersoft.Component.Routing.Core
 		public object Invoke(Dictionary<string, string> urlParams, Dictionary<string, string> routeParams, object objs)
 		{
 			object[] paramObjects = null;
-			JObject jObject = JObject.Parse(objs.ToString());
+			JObject jObject = null;
+			if (objs!=null && !string.IsNullOrWhiteSpace(objs.ToString()))
+				jObject = JObject.Parse(objs.ToString());
 			if (parametersCount > 0)
 			{
 				paramObjects = new object[parametersCount];
@@ -39,25 +41,27 @@ namespace Open.Genersoft.Component.Routing.Core
 				{ typeof(UrlParamAttribute), urlParams },
 				{ typeof(RouteParamAttribute), routeParams }
 			};
-			if (urlParams != null && urlParams.Count > 0 || routeParams != null && routeParams.Count > 0)
+
+			bool hasParam = urlParams != null && urlParams.Count > 0 || routeParams != null && routeParams.Count > 0;
+			for (int i = 0; i < parametersCount; i++)
 			{
-				for (int i = 0; i < parametersCount; i++)
+				if (parametersDict[i].ParameterType == typeof(RouteContext))
 				{
-					if (parametersDict[i].ParameterType == typeof(RouteContext))
-					{
-						paramObjects[i] = new RouteContext(urlParams, routeParams, objs);
-						continue;
-					}
-
-					AssembleParam<UrlParamAttribute>(paramDict, paramObjects, i);
-					AssembleParam<RouteParamAttribute>(paramDict, paramObjects, i);
-
-					if(jObject.ContainsKey(parametersDict[i].Name))
-					{
-						Type t = parametersDict[i].ParameterType;
-						paramObjects[i] = JsonConvert.DeserializeObject(jObject[parametersDict[i].Name].ToString(), t);
-					}				
+					paramObjects[i] = new RouteContext(urlParams, routeParams, objs);
+					continue;
 				}
+
+				if (hasParam)
+				{
+					AssembleParam<UrlParamAttribute>(paramDict, paramObjects, i);
+					AssembleParam<RouteParamAttribute>(paramDict, paramObjects, i); 
+				}
+
+				if(jObject!=null && jObject.ContainsKey(parametersDict[i].Name))
+				{
+					Type t = parametersDict[i].ParameterType;
+					paramObjects[i] = JsonConvert.DeserializeObject(jObject[parametersDict[i].Name].ToString(), t);
+				}				
 			}
 
 			object obj;
