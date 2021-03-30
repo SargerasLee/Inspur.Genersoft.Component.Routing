@@ -16,7 +16,7 @@ namespace Open.Genersoft.Component.Config.Global
 	{
 		public static event ConfigFileChangedEventHandler ConfigFileChanged;
 		private static readonly object obj = new object();
-		private const string PATH = "Global/ProjectGlobalConfig.xml";
+		private static readonly string PATH = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "zzy\\Global\\project-config.xml";
 		private static bool flag = false;
 		private static DateTime lastModifyTime = DateTime.MinValue;
 
@@ -24,16 +24,6 @@ namespace Open.Genersoft.Component.Config.Global
 		private static readonly List<string> Assemblies = new List<string>();
 		private static readonly Dictionary<string, LogConfig> LoggerConfig = new Dictionary<string, LogConfig>();
 
-		//internal class Modules
-		//{
-		//	public object this[string index]
-		//	{
-		//		get
-		//		{
-		//			return null;
-		//		}
-		//	}
-		//}
 
 		private static void Load()
 		{
