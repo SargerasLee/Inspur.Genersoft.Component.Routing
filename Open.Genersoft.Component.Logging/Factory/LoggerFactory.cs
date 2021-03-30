@@ -43,6 +43,11 @@ namespace Open.Genersoft.Component.Logging.Factory
 			return logDict[code];
 		}
 
+		/// <summary>
+		/// 获取日志类
+		/// </summary>
+		/// <param name="code">日志编号</param>
+		/// <returns></returns>
 		public GeneralLogger GetLogger(string code)
 		{
 			if (logDict.ContainsKey(code))

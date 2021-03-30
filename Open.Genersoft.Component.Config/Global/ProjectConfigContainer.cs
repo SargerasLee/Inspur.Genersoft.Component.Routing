@@ -9,6 +9,9 @@ using System.Xml;
 
 namespace Open.Genersoft.Component.Config.Global
 {
+	/// <summary>
+	/// 配置容器类
+	/// </summary>
 	public static class ProjectConfigContainer
 	{
 		public static event ConfigFileChangedEventHandler ConfigFileChanged;
@@ -86,6 +89,11 @@ namespace Open.Genersoft.Component.Config.Global
 			}
 		}
 
+		/// <summary>
+		/// 获取键值对
+		/// </summary>
+		/// <param name="code">键</param>
+		/// <returns></returns>
 		public static string GetProperty(string code)
 		{
 			ReloadIfFileChanged();
@@ -95,12 +103,21 @@ namespace Open.Genersoft.Component.Config.Global
 				throw new ConfigNotFoundException("未找到相应的属性配置");
 		}
 
+		/// <summary>
+		/// 获取配置的需要扫描的程序集
+		/// </summary>
+		/// <returns></returns>
 		public static List<string> GetAutoScanAssemblies()
 		{
 			ReloadIfFileChanged();
 			return Assemblies;
 		}
 
+		/// <summary>
+		/// 获取日志配置类
+		/// </summary>
+		/// <param name="code">日志编号</param>
+		/// <returns></returns>
 		public static LogConfig GetLogConfig(string code)
 		{
 			ReloadIfFileChanged();
