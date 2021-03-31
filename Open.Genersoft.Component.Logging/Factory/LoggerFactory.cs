@@ -29,7 +29,7 @@ namespace Open.Genersoft.Component.Logging.Factory
 		private const string DefaultLevel = "ALL";
 		private const string DefaultCode = "default";
 		private const string DefaultName = "default";
-		private const string DefaultPath = "c:\\log\\default";
+		private const string DefaultPath = "c:\\log\\default\\";
 
 		private LoggerFactory() { }
 

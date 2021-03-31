@@ -70,8 +70,8 @@ namespace Open.Genersoft.Component.Logging.Default
 				if (token)
 				{
 					string date = DateTime.Now.ToString(DatePattern);
-					string file = Path + $"{Name}-Log{date}.txt";
-					
+					string file = Path.EndsWith("\\") ? Path + $"{Name}-Log{date}.txt" : Path + $"\\{Name}-Log{date}.txt";
+
 					using (writer = new StreamWriter(file, true, Encoding.Default))
 					{
 						string time = DateTime.Now.ToString(TimePattern);
