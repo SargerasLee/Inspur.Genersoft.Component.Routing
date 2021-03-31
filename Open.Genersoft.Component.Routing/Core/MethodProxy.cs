@@ -57,7 +57,7 @@ namespace Open.Genersoft.Component.Routing.Core
 					AssembleParam<RouteParamAttribute>(paramDict, paramObjects, i); 
 				}
 
-				if(jObject!=null && jObject.ContainsKey(parametersDict[i].Name))
+				if(jObject!=null && jObject.GetValue(parametersDict[i].Name)!=null)
 				{
 					Type t = parametersDict[i].ParameterType;
 					paramObjects[i] = JsonConvert.DeserializeObject(jObject[parametersDict[i].Name].ToString(), t);
