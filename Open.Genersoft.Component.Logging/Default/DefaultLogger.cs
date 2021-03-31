@@ -54,6 +54,19 @@ namespace Open.Genersoft.Component.Logging.Default
 		{
 			if (Level == LogLevel.OFF) return;
 			StringBuilder sb = new StringBuilder(256);
+			StackTrace st;
+			StackFrame sf;
+			MethodBase method = null;
+			int line = 0;
+			string className = "";
+			if (level == LogLevel.TRACE)
+			{
+				st = new StackTrace(true);
+				sf = st.GetFrame(2);
+				method = sf.GetMethod();
+				line = sf.GetFileLineNumber();
+				className = method.DeclaringType.FullName;
+			}
 
 			foreach (var s in text)
 			{
@@ -70,24 +83,18 @@ namespace Open.Genersoft.Component.Logging.Default
 				if (token)
 				{
 					string date = DateTime.Now.ToString(DatePattern);
-					string file = Path.EndsWith("\\") ? Path + $"{Name}-Log{date}.txt" : Path + $"\\{Name}-Log{date}.txt";
-
+					string file = Path + $"{Name}-Log{date}.txt";
 					using (writer = new StreamWriter(file, true, Encoding.Default))
 					{
 						string time = DateTime.Now.ToString(TimePattern);
 						writer.AutoFlush = false;
 						writer.WriteLine(time + $":【{ levelDict[level]}】");
-						if(level==LogLevel.FATAL)
+						if(level == LogLevel.FATAL)
 						{
-							writer.WriteLine("【致命错误】：" + text[0]);
+							writer.WriteLine("【系统错误】：" + text[0]);
 						}
-						if(level==LogLevel.TRACE)
-						{
-							StackTrace st = new StackTrace(true);
-							StackFrame sf = st.GetFrame(2);
-							MethodBase method = sf.GetMethod();
-							int line = sf.GetFileLineNumber();
-							string className = method.DeclaringType.FullName;
+						if(level == LogLevel.TRACE)
+						{			
 							writer.WriteLine("【进程】：" + processName);
 							writer.WriteLine("【线程ID】：" + Thread.CurrentThread.ManagedThreadId);
 							writer.WriteLine("【类名】：" + className);
@@ -97,10 +104,10 @@ namespace Open.Genersoft.Component.Logging.Default
 						writer.WriteLine("【信息】：" + sb);
 						writer.Flush();
 					}
-					Monitor.Exit(lockObj);
+					Monitor.Exit(lockObj);		
 				}
 			}
-			catch (Exception) { }
+			catch (Exception) {}
 		}
 
 		public override void PrintObject(object obj)

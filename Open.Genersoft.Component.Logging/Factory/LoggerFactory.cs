@@ -80,7 +80,7 @@ namespace Open.Genersoft.Component.Logging.Factory
 			GeneralLogger logger = Activator.CreateInstance(t) as GeneralLogger;
 			logger.Code = module["code"];
 			logger.Name = module["name"];
-			logger.Path = module["path"];
+			logger.Path = module["path"].EndsWith("\\") ? module["path"] : module["path"] + "\\";
 			logger.Level = levelDict[module["logLevel"]];
 			logger.TimePattern = module["timePattern"];
 			return logger;
