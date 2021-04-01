@@ -4,8 +4,8 @@
 + 只使用日志 需要 Config和Logging两个dll
 + 只使用路由映射 需要Config 和Routing两个dll
 + 单独使用Config，确保Config.dll被加载到内存中，使用gs7不用看此段
-1. 如果是自己写的桌面程序，需要添加Config引用
-2. 如果在IIS ，需要放到应用程序bin下
+	1. 如果是自己写的桌面程序，需要添加Config引用
+	2. 如果在IIS ，需要放到应用程序bin下
 ## 使用范围
 Config和Logging全局可以使用
 Routing用于前台调用后台，如果是自动任务建议用平台的 方法构件，只是建议
@@ -67,15 +67,15 @@ route 为路径
 objects 为 序列化后的json对象，json格式
 ```json
 {
-	参数1:数组/字符串/数字/json/布尔/null
-	参数2: 数组/字符串/数字/json/布尔/null
+	"方法参数1":"数组/字符串/数字/json/布尔/null"
+	"方法参数2":"数组/字符串/数字/json/布尔/null"
 }
 ```
 参数I 的名称对应方法参数名称，会自动转换类型，见示例
  
 ### 异常
-#### `BusinessLogicException`
-#### `RouteNotMatchException`
++ `BusinessLogicException`
++ `RouteNotMatchException`
  
 ### 可使用的特性
 使用时 不需要加Attribute后缀 ，例如
@@ -85,22 +85,133 @@ public class helper
 {
 }
 ```
-#### `CustomComponentAttribute`
++ `CustomComponentAttribute`
 只能用在类上，标识 此类是自定义组件，会被扫描进组件容器
-#### `JsonAttribute`
++ `JsonAttribute`
 用在方法上，标识 方法返回值 要序列化为 json串
-#### `RouteMappingAttribute`
++ `RouteMappingAttribute`
 用在类和方法上，标识 映射的路径，类上不可以使用路由参数，方法上可以使用路由参数
-#### `RouteParamAttribute`
++ `RouteParamAttribute`
 路由参数，用在方法参数上，标识此方法参数需要取路由中的值，会将url中的路由参数 赋给方法参数，可以 起别名，没有别名默认按参数名称匹配
-#### `UrlParamAttribute`
++ `UrlParamAttribute`
 url参数：url问号 后面的参数，用在方法上，和路由参数用法相似，也可以起别名
-#### 上下文参数`RouteContext`
-内涵 url，route参数字典，和前台传进来的 json参数
++ 上下文参数`RouteContext`
+内含 url，route参数字典，和前台传进来的 json参数
  
 ### 配置
 需要配置 自动扫描的程序集，见全局配置文件
 ### 示例
+#### 前端
+fetch见`ZZY_FSSC_Common.js`脚本
+```javascript
+"use strict";
+//依赖jquery
+window.zzy = window.zzy || {};
+
+zzy.show = {
+  /**
+   *
+   * @param {String} url 打开的窗口url
+   * @param {Boolean} isFill 是否填充
+   * @param {String} title 标题
+   * @returns dialog ID
+   * @description 打开dialog
+   */
+  openDialogNoButton: function (url, isFill, title) {
+    let href = encodeURI(url);
+    let digId = `dialog${zzy.tools.guid()}`;
+    let ifId = `iFrame${zzy.tools.guid()}`;
+    $(`<div id="${digId}"></div>`).appendTo($("body"));
+    $(`#${digId}`).dialog({
+      title: title ? title : " ", //标题
+      width: isFill ? window.innerWidth : window.innerWidth * 0.8, //宽  window.innerWidth
+      height: isFill ? window.innerHeight : window.innerHeight * 0.8, //高  window.innerHeight
+      align: "center", //对齐方式
+      closed: false, //是否关闭
+      cache: false, //是否启用缓存
+      resizable: true, //是否可以拉伸
+      modal: true, //是否模态窗口
+      content: `<iframe id = "${ifId}" scrolling="no" frameborder="0"  src="${href}" style="width:100%;height:99%;"></iframe>`,
+      buttons: [],
+      onClose: function () {},
+    });
+    return digId;
+  },
+
+  /**
+   *
+   * @param {String} url 打开的窗口url
+   * @param {Function} operateFunc 确定按钮操作方法 func(dialogId,iframeId){}
+   * @param {Boolean} isFill 是否填充
+   * @returns dialog ID
+   */
+  openDialogButton: function (url, operateFunc, title, isFill) {
+    let href = encodeURI(url);
+    let dialogId = `dialog${zzy.tools.guid()}`;
+    let iframeId = `iFrame${zzy.tools.guid()}`;
+    $(`<div id="${dialogId}"></div>`).appendTo($("body"));
+    $(`#${dialogId}`).dialog({
+      title: title? title : " ", //标题
+      width: isFill ? window.innerWidth : window.innerWidth*0.8, //宽  window.innerWidth
+      height: isFill ? window.innerHeight : window.innerHeight*0.8, //高  window.innerHeight
+      align: "center", //对齐方式
+      closed: false, //是否关闭
+      cache: false, //是否启用缓存
+      resizable: true, //是否可以拉伸
+      modal: true, //是否模态窗口
+      content: `<iframe id = "${iframeId}" scrolling="no" frameborder="0"  src="${href}" style="width:100%;height:99%;"></iframe>`,
+      buttons: [
+        {
+          text: "确定",
+          iconCls: "l-btn-icon icon-Confirm",
+          handler: function () {
+            operateFunc(dialogId,iframeId);
+            $(`#${dialogId}`).dialog("close");
+          },
+        },
+        {
+          text: "关闭",
+          iconCls: "l-btn-icon icon-Close",
+          handler: function () {
+            $(`#${dialogId}`).dialog("close");
+          },
+        },
+      ],
+      onClose: function () {},
+    });
+    return dialogId;
+  }
+};
+
+zzy.control = {};
+
+zzy.rest = {
+  fetch: function (route, params, successcallback, errcallback) {
+    let dataService = gsp.application.applicationContext.injector.get(
+      "$dataServiceProxy"
+    );
+    return dataService.invokeMethod(
+      "Test.Base.Component.BusinessLogic",
+      "MethodMapping",
+      [route, params],
+      successcallback,
+      errcallback
+    );
+  },
+};
+
+zzy.tools = {
+
+  guid: function () {
+    let S4 = function () {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    return S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4();
+  },
+};
+
+```
+#### 后端
 使用参考：整个项目可以建一个业务逻辑构件 调用此调度器。
 自己建的自定义构件 业务逻辑错误可以抛出 `BusinessLogicException`异常,在最外层捕获并抛出 `GSPException`。
 ```c#
@@ -222,22 +333,36 @@ namespace Component
 	}
 }
 ```
-#### 前端
-`Fetch 见ZZY_FSSC_Common`脚本
-#### 后端
 ## Logging日志
 ### 程序集 `Open.Genersoft.Component.Logging`
 ### 核心
 #### `LoggerFactory`
-命名空间：`Open.Genersoft.Component.Logging.Factory`
-用法：
-对应配置文件 `GetLogger(code)` code对应配置的Code
-Code Path Level 必填，其他选填
+##### 命名空间：`Open.Genersoft.Component.Logging.Factory`
+用法：对应配置文件 `GetLogger(code)` code对应配置的Code,
+其中Code Path Level 必填，其他选填
  
 #### `GeneralLogger`
-命名空间：`Open.Genersoft.Component.Logging.Facade`
-日志抽象类
-公开方法如下
+##### 命名空间：`Open.Genersoft.Component.Logging.Facade`
+日志抽象类公开方法如下
+```c#
+public abstract void PrintXml(string desc, string xmlStr);
+
+public abstract void PrintObject(object obj);
+
+public abstract void Debug(params string[] text);
+
+public abstract void Info(params string[] text);
+
+public abstract void Error(string text, Exception ex = null);
+
+public abstract void Warn(params string[] text);
+
+public abstract void Fatal(string text, Exception ex = null);
+
+public abstract void Trace(params string[] text);
+```
+##### 用法
+`private readonly GeneralLogger logger = LoggerFactory.Instance.GetLogger("default");`
 ## Dll
 依赖关系
 Config.dll不依赖
