@@ -61,13 +61,21 @@ Routing用于前台调用后台，如果是自动任务建议用平台的 方法
 #### Router调度器
 命名空间：`Open.Genersoft.Component.Routing.Public.Spi`
 定义
- 
+```c#
+public class Router
+{
+	public static object Routing(string route, object objects)
+	{
+		return ComponentDispatcher.Instance.Dispatch(route, objects);
+	}
+}
+```
 使用：Routing方法
 route 为路径
 objects 为 序列化后的json对象，json格式
 ```json
 {
-	"方法参数1":"数组/字符串/数字/json/布尔/null"
+	"方法参数1":"数组/字符串/数字/json/布尔/null",
 	"方法参数2":"数组/字符串/数字/json/布尔/null"
 }
 ```
@@ -99,7 +107,7 @@ url参数：url问号 后面的参数，用在方法上，和路由参数用法�
 内含 url，route参数字典，和前台传进来的 json参数
  
 ### 配置
-需要配置 自动扫描的程序集，见全局配置文件
+需要配置 自动扫描的程序集，见[全局配置文件](#配置文件模板)
 ### 示例
 #### 前端
 fetch见`ZZY_FSSC_Common.js`脚本
@@ -338,7 +346,8 @@ namespace Component
 ### 核心
 #### `LoggerFactory`
 ##### 命名空间：`Open.Genersoft.Component.Logging.Factory`
-用法：对应配置文件 `GetLogger(code)` code对应配置的Code,
+用法：对应配置文件 `GetLogger(string code)` 
+code对应配置的Code,
 其中Code Path Level 必填，其他选填
  
 #### `GeneralLogger`
@@ -364,7 +373,7 @@ public abstract void Trace(params string[] text);
 ##### 用法
 `private readonly GeneralLogger logger = LoggerFactory.Instance.GetLogger("default");`
 ## Dll
-依赖关系
-Config.dll不依赖
-Routing和Logging都依赖Config 和Newtonsoft （版本6.0.1）
+### 依赖关系
++ Config.dll不依赖
++ Routing和Logging都依赖Config 和Newtonsoft （版本6.0.1）
     
