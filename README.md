@@ -7,8 +7,8 @@
 	1. 如果是自己写的桌面程序，需要添加Config引用
 	2. 如果在IIS ，需要放到应用程序bin下
 ## 使用范围
-Config和Logging全局可以使用
-Routing用于前台调用后台
++ `Config`和Logging可以无条件使用
++ `Routing`只是一个组件，不是完整的框架，实际使用需要自己注册`IHttpModule`，然后拦截请求进入Router处理
 ## 全局配置文件
 ### 程序集 `Open.Genersoft.Component.Config`
 ### 核心类
@@ -112,7 +112,7 @@ url参数：url问号 后面的参数，用在方法上，和路由参数用法�
 #### 前端
 不提供前端代码，如要使用，使用`$.get()`或者`$.post()`
 #### 后端
-使用参考：整个项目可以建一个ashx文件， 调用此调度器。
+使用参考：建一个ashx文件， 调用此调度器。
 ```c#
 namespace Test.Base.Component
 {
