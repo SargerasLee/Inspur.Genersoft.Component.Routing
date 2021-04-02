@@ -3,12 +3,12 @@
 包含**日志**,**配置**和**路由映射**功能
 + 只使用日志 需要 Config和Logging两个dll
 + 只使用路由映射 需要Config 和Routing两个dll
-+ 单独使用Config，确保Config.dll被加载到内存中，使用gs7不用看此段
++ 单独使用Config，确保Config.dll被加载到内存中
 	1. 如果是自己写的桌面程序，需要添加Config引用
 	2. 如果在IIS ，需要放到应用程序bin下
 ## 使用范围
 Config和Logging全局可以使用
-Routing用于前台调用后台，如果是自动任务建议用平台的 方法构件，只是建议
+Routing用于前台调用后台
 ## 全局配置文件
 ### 程序集 `Open.Genersoft.Component.Config`
 ### 核心类
@@ -27,7 +27,7 @@ Routing用于前台调用后台，如果是自动任务建议用平台的 方法
 读取日志配置
  
 #### 配置文件模板
-目前没有xsd约束，需要放在程序安装目录下+`/zzy/Global/`下（gs7为`bscw_local/zzy/Global/`下）
+目前没有xsd约束，需要放在程序安装目录下+`/zzy/Global/`下
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
@@ -110,125 +110,30 @@ url参数：url问号 后面的参数，用在方法上，和路由参数用法�
 需要配置 自动扫描的程序集，见[全局配置文件](#配置文件模板)
 ### 示例
 #### 前端
-fetch见`ZZY_FSSC_Common.js`脚本
-```javascript
-"use strict";
-//依赖jquery
-window.zzy = window.zzy || {};
-
-zzy.show = {
-  /**
-   *
-   * @param {String} url 打开的窗口url
-   * @param {Boolean} isFill 是否填充
-   * @param {String} title 标题
-   * @returns dialog ID
-   * @description 打开dialog
-   */
-  openDialogNoButton: function (url, isFill, title) {
-    let href = encodeURI(url);
-    let digId = `dialog${zzy.tools.guid()}`;
-    let ifId = `iFrame${zzy.tools.guid()}`;
-    $(`<div id="${digId}"></div>`).appendTo($("body"));
-    $(`#${digId}`).dialog({
-      title: title ? title : " ", //标题
-      width: isFill ? window.innerWidth : window.innerWidth * 0.8, //宽  window.innerWidth
-      height: isFill ? window.innerHeight : window.innerHeight * 0.8, //高  window.innerHeight
-      align: "center", //对齐方式
-      closed: false, //是否关闭
-      cache: false, //是否启用缓存
-      resizable: true, //是否可以拉伸
-      modal: true, //是否模态窗口
-      content: `<iframe id = "${ifId}" scrolling="no" frameborder="0"  src="${href}" style="width:100%;height:99%;"></iframe>`,
-      buttons: [],
-      onClose: function () {},
-    });
-    return digId;
-  },
-
-  /**
-   *
-   * @param {String} url 打开的窗口url
-   * @param {Function} operateFunc 确定按钮操作方法 func(dialogId,iframeId){}
-   * @param {Boolean} isFill 是否填充
-   * @returns dialog ID
-   */
-  openDialogButton: function (url, operateFunc, title, isFill) {
-    let href = encodeURI(url);
-    let dialogId = `dialog${zzy.tools.guid()}`;
-    let iframeId = `iFrame${zzy.tools.guid()}`;
-    $(`<div id="${dialogId}"></div>`).appendTo($("body"));
-    $(`#${dialogId}`).dialog({
-      title: title? title : " ", //标题
-      width: isFill ? window.innerWidth : window.innerWidth*0.8, //宽  window.innerWidth
-      height: isFill ? window.innerHeight : window.innerHeight*0.8, //高  window.innerHeight
-      align: "center", //对齐方式
-      closed: false, //是否关闭
-      cache: false, //是否启用缓存
-      resizable: true, //是否可以拉伸
-      modal: true, //是否模态窗口
-      content: `<iframe id = "${iframeId}" scrolling="no" frameborder="0"  src="${href}" style="width:100%;height:99%;"></iframe>`,
-      buttons: [
-        {
-          text: "确定",
-          iconCls: "l-btn-icon icon-Confirm",
-          handler: function () {
-            operateFunc(dialogId,iframeId);
-            $(`#${dialogId}`).dialog("close");
-          },
-        },
-        {
-          text: "关闭",
-          iconCls: "l-btn-icon icon-Close",
-          handler: function () {
-            $(`#${dialogId}`).dialog("close");
-          },
-        },
-      ],
-      onClose: function () {},
-    });
-    return dialogId;
-  }
-};
-
-zzy.control = {};
-
-zzy.rest = {
-  fetch: function (route, params, successcallback, errcallback) {
-    let dataService = gsp.application.applicationContext.injector.get(
-      "$dataServiceProxy"
-    );
-    return dataService.invokeMethod(
-      "Test.Base.Component.BusinessLogic",
-      "MethodMapping",
-      [route, params],
-      successcallback,
-      errcallback
-    );
-  },
-};
-
-zzy.tools = {
-
-  guid: function () {
-    let S4 = function () {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4();
-  },
-};
-
-```
+不提供前端代码，如要使用，使用`$.get()`或者`$.post()`
 #### 后端
-使用参考：整个项目可以建一个业务逻辑构件 调用此调度器。
-自己建的自定义构件 业务逻辑错误可以抛出 `BusinessLogicException`异常,在最外层捕获并抛出 `GSPException`。
+使用参考：整个项目可以建一个ashx文件， 调用此调度器。
 ```c#
 namespace Test.Base.Component
 {
-	public class BusinessLogic : BaseBizComponent
+	public class BusinessLogic : IHttpHandler
 	{
-		[BizComponentMethod(PropertyCommit ="s")]
-		public object MethodMapping(string route, string objs)
+		public void ProcessRequest(HttpContext context)
+		{
+			//验证。登录根据实际情况添加
+			string rawUrl = context.Request.RawUrl;
+			byte[] b = new byte[context.Request.ContentLength];
+			int count = context.Request.InputStream.Read(b, 0, b.Length);
+			string objs = Encoding.UTF8.GetString(b);
+			object res = MethodMapping();
+			string data = JsonConvert.SerializeObject(res);
+			context.Response.Charset = "utf-8";
+			context.Response.ContentEncoding = Encoding.UTF8;
+			context.Response.ContentType = "application/json";
+			context.Response.Write(data);
+			
+		}
+		private object MethodMapping(string route, string objs)
 		{
 			try
 			{
@@ -236,7 +141,20 @@ namespace Test.Base.Component
 			}
 			catch (BusinessLogicException e)
 			{
-				throw new GSPException(e.Message,ErrorLevel.Warning);
+				Dictionary<string, string> res = new Dictionary<string, string>
+				{
+					{"flag","e" },
+					{"msg",e.Message }
+				};
+				return res;
+			}
+		}
+		
+		public bool IsReusable
+		{
+			get
+			{
+				return true;
 			}
 		}
 	}
@@ -250,16 +168,16 @@ namespace Component
 	public class PlfkdLogic
 	{
 		//private static List<Plfkd> plfkds = GetPLFKDList();
-		private readonly IGSPDatabase db = GSPContext.Current.Database;
+		private readonly Database db = DbFactory.getConnection();
 		private readonly GeneralLogger logger = LoggerFactory.Instance.GetLogger("default");
 
-		[RouteMapping("/query/{djlx}/{djnm}")]
+		[RouteMapping("/query/{lx}/{nm}")]
 		[Json]
-		public DataTable SelectBill([RouteParam] string djlx, [RouteParam] string djnm)
+		public DataTable SelectBill([RouteParam] string lx, [RouteParam] string nm)
 		{
-			string sql = "select * from robxdj where robxdj_bxlx={0} and robxdj_nm={1}";
+			string sql = "select * from saleorders where lx={0} and id={1}";
 			logger.Trace(sql);
-			return db.ExecuteDataSet(sql, djlx, djnm).Tables[0];
+			return db.Select(sql, djlx, djnm).Tables[0];
 		}
 
 		[RouteMapping("/save")]
@@ -288,9 +206,9 @@ namespace Component
 		[Json]
 		public int DeleteBill([RouteParam] string id)
 		{
-			string sql = $"delete from robxdj where robxdj_nm='{id}'";
+			string sql = $"delete from saleorders where nm='{id}'";
 			logger.Debug(sql);
-			return db.ExecSqlStatement(sql);
+			return db.Delete(sql);
 		}
 
 		private static List<Plfkd> GetPLFKDList()
