@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,10 +57,13 @@
     <Compile Include="Core\RegexPattern.cs" />
     <Compile Include="Core\RouteContext.cs" />
     <Compile Include="Exceptions\BusinessLogicException.cs" />
+    <Compile Include="Exceptions\InvalidUrlException.cs" />
     <Compile Include="Exceptions\RouteNotMatchException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public\ComponentDispatcher.cs" />
     <Compile Include="Public\Spi\Router.cs" />
+    <Compile Include="Public\Utils\TypeConvertUtil.cs" />
+    <Compile Include="Public\Utils\HttpUrlUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Open.Genersoft.Component.Config\Open.Genersoft.Component.Config.csproj">
@@ -70,5 +74,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Open.Genersoft.Component.Routing.Attributes;
 using Open.Genersoft.Component.Routing.Exceptions;
+using Open.Genersoft.Component.Routing.Public.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -40,18 +41,14 @@ namespace Open.Genersoft.Component.Routing.Core
 			}
 		}
 
-		public object Invoke(string route, object obj)
+		public object Invoke(string url, Dictionary<string, string> urlParams, object obj)
 		{
-			route = route.Trim();
-			string url = route, kv = string.Empty;
-
-			SplitUrl(route, ref url, ref kv);
-
+			url = url.Trim();
 			string target = FindPattern(url);
+
 			if (string.IsNullOrWhiteSpace(target))
 				throw new RouteNotMatchException("未匹配方法");
 
-			Dictionary<string, string> urlParams = ExtractUrlParams(kv);
 			Dictionary<string, string> routeParams = ExtractRouteParams(url, target);
 
 			object o = MethodDict[target].Invoke(urlParams, routeParams, obj);
@@ -84,37 +81,6 @@ namespace Open.Genersoft.Component.Routing.Core
 				}
 			}
 			return routeParamDict;
-		}
-
-		private static void SplitUrl(string route, ref string url, ref string kv)
-		{
-			int mark = route.IndexOf('?');
-			if (mark > 0)
-			{
-				url = route.Substring(0, mark);
-				if (mark < route.Length - 1)
-					kv = route.Substring(mark + 1);
-			}
-		}
-
-		private static Dictionary<string, string> ExtractUrlParams(string kvStr)
-		{
-			kvStr = kvStr.Trim();
-			if (string.IsNullOrWhiteSpace(kvStr))
-				return null;
-			string[] keyValues = kvStr.Split('&');
-			Dictionary<string, string> urlParams = new Dictionary<string, string>();
-			string[] s;
-			foreach (string kv in keyValues)
-			{
-				if (string.IsNullOrWhiteSpace(kv.Trim()))
-					continue;
-				s = kv.Split('=');
-				if (string.IsNullOrWhiteSpace(s[0].Trim()))
-					continue;
-				urlParams.Add(s[0], s[1]);
-			}
-			return urlParams;
 		}
 
 		private string FindPattern(string url)

@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Open.Genersoft.Component.Routing.Public.Utils;
 
 namespace Open.Genersoft.Component.Routing.Core
 {
@@ -91,30 +92,13 @@ namespace Open.Genersoft.Component.Routing.Core
 				string paramName = paramAttr.Name;
 				if (!string.IsNullOrWhiteSpace(paramName))
 				{
-					paramObjects[i] = ConvertParamToBasicType(parametersDict[i].ParameterType, paramDict[paramAttr.GetType()][paramName]);
+					paramObjects[i] = TypeConvertUtil.ConvertToBasicType(parametersDict[i].ParameterType, paramDict[paramAttr.GetType()][paramName]);
 				}
 				else
 				{
-					paramObjects[i] = ConvertParamToBasicType(parametersDict[i].ParameterType, paramDict[paramAttr.GetType()][parametersDict[i].Name]);
+					paramObjects[i] = TypeConvertUtil.ConvertToBasicType(parametersDict[i].ParameterType, paramDict[paramAttr.GetType()][parametersDict[i].Name]);
 				}
 			}
-		}
-
-		private object ConvertParamToBasicType(Type t, string value)
-		{
-
-			if (t == typeof(int)) return Convert.ToInt32(value);
-			else if (t == typeof(long)) return Convert.ToInt64(value);
-			else if (t == typeof(short)) return Convert.ToInt16(value);
-			else if (t == typeof(decimal)) return Convert.ToDecimal(value);
-			else if (t == typeof(bool)) return Convert.ToBoolean(value);
-			else if (t == typeof(DateTime)) return Convert.ToDateTime(value);
-			else if (t == typeof(char)) return Convert.ToChar(value);
-			else if (t == typeof(double)) return Convert.ToDouble(value);
-			else if (t == typeof(float)) return Convert.ToSingle(value);
-			else if (t == typeof(byte)) return Convert.ToByte(value);
-			else if (t == typeof(sbyte)) return Convert.ToSByte(value);
-			else return value;
 		}
 	}
 }
