@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.Genersoft.Component.Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.Genersoft.Component.UnitTest", "Open.Genersoft.Component.UnitTest\Open.Genersoft.Component.UnitTest.csproj", "{ACEEF2BB-120E-467A-AB3C-2EEA2FB0B180}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Open.Genersoft.Component.Web", "Open.Genersoft.Component.Web\Open.Genersoft.Component.Web.csproj", "{ED73B678-27F8-4B40-A240-940118DD6433}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{ACEEF2BB-120E-467A-AB3C-2EEA2FB0B180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACEEF2BB-120E-467A-AB3C-2EEA2FB0B180}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACEEF2BB-120E-467A-AB3C-2EEA2FB0B180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED73B678-27F8-4B40-A240-940118DD6433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED73B678-27F8-4B40-A240-940118DD6433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED73B678-27F8-4B40-A240-940118DD6433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED73B678-27F8-4B40-A240-940118DD6433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
