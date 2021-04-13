@@ -56,6 +56,7 @@
     <Compile Include="Core\MethodProxy.cs" />
     <Compile Include="Core\RegexPattern.cs" />
     <Compile Include="Core\RouteContext.cs" />
+    <Compile Include="Entity\CustomComponentResult.cs" />
     <Compile Include="Exceptions\BusinessLogicException.cs" />
     <Compile Include="Exceptions\InvalidUrlException.cs" />
     <Compile Include="Exceptions\RouteNotMatchException.cs" />

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Open.Genersoft.Component.Routing.Entity;
+using Open.Genersoft.Component.Routing.Public.Spi;
+using System.IO;
 using System.Web;
 
 namespace Open.Genersoft.Component.Web.Handler
@@ -19,7 +17,19 @@ namespace Open.Genersoft.Component.Web.Handler
 
 		public void ProcessRequest(HttpContext context)
 		{
-			
+			HttpRequest request = context.Request;
+			HttpResponse response = context.Response;
+			string str = string.Empty;
+			CustomComponentResult result;
+			if (request.HttpMethod == "POST")
+			{
+				StreamReader sr = new StreamReader(request.InputStream);
+				str = sr.ReadToEnd();
+			}
+			result = (CustomComponentResult)Router.Routing(request.RawUrl, str);
+			response.ContentType = result.MediaType;
+			response.Write(result.Data.ToString());
+			response.End();
 		}
 	}
 }

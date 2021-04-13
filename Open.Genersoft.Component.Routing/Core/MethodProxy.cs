@@ -1,11 +1,12 @@
-﻿using Open.Genersoft.Component.Routing.Attributes;
-using Open.Genersoft.Component.Routing.Exceptions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Open.Genersoft.Component.Routing.Attributes;
+using Open.Genersoft.Component.Routing.Entity;
+using Open.Genersoft.Component.Routing.Exceptions;
+using Open.Genersoft.Component.Routing.Public.Utils;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Open.Genersoft.Component.Routing.Public.Utils;
 
 namespace Open.Genersoft.Component.Routing.Core
 {
@@ -65,10 +66,11 @@ namespace Open.Genersoft.Component.Routing.Core
 				}				
 			}
 
-			object obj;
+			CustomComponentResult result = new CustomComponentResult();
 			try
 			{
-				obj = methodInfo.Invoke(targetObj, paramObjects);
+				result.Data = methodInfo.Invoke(targetObj, paramObjects);
+				result.MediaType = "text/plain";
 			}
 			catch (TargetInvocationException tex)//反调调用的方法 抛出的异常被封装在TargetInvocationException 里
 			{
@@ -80,8 +82,11 @@ namespace Open.Genersoft.Component.Routing.Core
 			}
 			JsonAttribute jsonAttribute = methodInfo.GetCustomAttribute<JsonAttribute>(false);
 			if (jsonAttribute != null)
-				obj = JsonConvert.SerializeObject(obj, Formatting.Indented);
-			return obj;
+			{
+				result.Data = JsonConvert.SerializeObject(result.Data, Formatting.Indented);
+				result.MediaType = "application/json";
+			}
+			return result;
 		}
 
 		private void AssembleParam<T>(Dictionary<Type, Dictionary<string, string>> paramDict, object[] paramObjects, int i) where T : ParameterAttribute
