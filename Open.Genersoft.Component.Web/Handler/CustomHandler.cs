@@ -23,10 +23,10 @@ namespace Open.Genersoft.Component.Web.Handler
 			CustomComponentResult result;
 			if (request.HttpMethod == "POST")
 			{
-				StreamReader sr = new StreamReader(request.InputStream);
-				str = sr.ReadToEnd();
+					StreamReader sr = new StreamReader(request.InputStream);
+					str = sr.ReadToEnd(); 
 			}
-			result = (CustomComponentResult)Router.Routing(request.RawUrl, str);
+			result = Router.Routing(request.RawUrl, str);
 			response.ContentType = result.MediaType;
 			response.Write(result.Data.ToString());
 			response.End();

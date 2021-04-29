@@ -1,4 +1,5 @@
 ﻿using Open.Genersoft.Component.Routing.Attributes;
+using Open.Genersoft.Component.Routing.Entity;
 using Open.Genersoft.Component.Routing.Exceptions;
 using Open.Genersoft.Component.Routing.Public.Utils;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace Open.Genersoft.Component.Routing.Core
 			}
 		}
 
-		public object Invoke(string url, Dictionary<string, string> urlParams, object obj)
+		public CustomComponentResult Invoke(string url, Dictionary<string, string> urlParams, object obj)
 		{
 			url = url.Trim();
 			string target = FindPattern(url);
@@ -51,8 +52,7 @@ namespace Open.Genersoft.Component.Routing.Core
 
 			Dictionary<string, string> routeParams = ExtractRouteParams(url, target);
 
-			object o = MethodDict[target].Invoke(urlParams, routeParams, obj);
-			return o;
+			return MethodDict[target].Invoke(urlParams, routeParams, obj);
 		}
 
 		private Dictionary<string, string> ExtractRouteParams(string url, string target)

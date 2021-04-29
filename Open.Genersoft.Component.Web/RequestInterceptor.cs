@@ -1,5 +1,7 @@
 ﻿using Open.Genersoft.Component.Config.Global;
 using Open.Genersoft.Component.Routing.Public.Spi;
+using Open.Genersoft.Component.Web.Filter;
+using Open.Genersoft.Component.Web.Filter.Impls;
 using Open.Genersoft.Component.Web.Handler;
 using System;
 using System.IO;
@@ -35,7 +37,12 @@ namespace Open.Genersoft.Component.Web
 		{
 			HttpApplication httpApplication = (HttpApplication)sender;
 			if(httpApplication.Request.RawUrl.IndexOf("/") > 0)
-			httpApplication.Context.RemapHandler(handler);
+			{
+				FilterChain chain = new FilterChain(new HttpUrlFilter());
+				chain.DoFilter(httpApplication.Request, httpApplication.Response);
+				httpApplication.Context.RemapHandler(handler);
+			}
+			
 			
 		}
 

@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\HttpFilterAttribute.cs" />
+    <Compile Include="Filter\FilterChain.cs" />
+    <Compile Include="Filter\IHttpFilter.cs" />
+    <Compile Include="Filter\Impls\HttpUrlFilter.cs" />
     <Compile Include="Handler\CustomHandler.cs" />
     <Compile Include="RequestInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

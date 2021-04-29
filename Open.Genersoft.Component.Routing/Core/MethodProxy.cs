@@ -28,7 +28,7 @@ namespace Open.Genersoft.Component.Routing.Core
 			}
 		}
 
-		public object Invoke(Dictionary<string, string> urlParams, Dictionary<string, string> routeParams, object objs)
+		public CustomComponentResult Invoke(Dictionary<string, string> urlParams, Dictionary<string, string> routeParams, object objs)
 		{
 			object[] paramObjects = null;
 			JObject jObject = null;
