@@ -13,12 +13,12 @@ namespace Open.Genersoft.Component.UnitTest.LogTest
 			Task[] task = new Task[60];
 			for (int i=0;i<10;i++)
 			{
-				task[i*6+0] =Task.Run(() => logger.Debug($"debug:{i}"));
-				task[i*6+1] = Task.Run(() => logger.Info($"info:{i}"));
-				task[i * 6 + 2] =Task.Run(() => logger.Warn($"warn:{i}"));
-				task[i * 6 + 3] =Task.Run(() => logger.Fatal($"Fatal:{i}"));
-				task[i * 6 + 4] =Task.Run(() => logger.Error($"Error:{i}"));
-				task[i * 6 + 5] = Task.Run(() => logger.Trace($"Trace:{i}"));
+				task[i*6+0] =Task.Run(() => logger.Debug($"debug:我尼玛我尼玛我尼玛我尼玛我尼玛我尼玛{i}"));
+				task[i*6+1] = Task.Run(() => logger.Info($"info:我尼玛我尼玛我尼玛我尼玛我尼玛我尼玛{i}"));
+				task[i * 6 + 2] =Task.Run(() => logger.Warn($"warn:我尼玛我尼玛我尼玛我尼玛我尼玛我尼玛{i}"));
+				task[i * 6 + 3] =Task.Run(() => logger.Fatal($"Fatal:我尼玛我尼玛我尼玛我尼玛我尼玛我尼玛{i}"));
+				task[i * 6 + 4] =Task.Run(() => logger.Error($"Error:我尼玛我尼玛我尼玛我尼玛我尼玛我尼玛{i}"));
+				task[i * 6 + 5] = Task.Run(() => logger.Trace($"Trace:我尼玛我尼玛我尼玛我尼玛我尼玛我尼玛{i}"));
 				Thread.Sleep(100);
 			}
 			Task.WaitAll(task);

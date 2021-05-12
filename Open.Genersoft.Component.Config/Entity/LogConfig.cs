@@ -33,8 +33,12 @@
 		/// 日志时间戳 格式 时分秒.毫秒
 		/// </summary>
 		public string TimePattern{ get; }
+		/// <summary>
+		/// 切分大小，单位MB
+		/// </summary>
+		public double Slice{ get; }
 
-		public LogConfig(string code, string name, string path, string assembly,string clazz, string level, string timePattern)
+		public LogConfig(string code, string name, string path, string assembly,string clazz, string level, string timePattern, double slice)
 		{
 			Code = code;
 			Name = name;
@@ -43,6 +47,7 @@
 			Class = clazz;
 			Level = level;
 			TimePattern = timePattern;
+			Slice = slice;
 		}
 	}
 }

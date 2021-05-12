@@ -70,7 +70,7 @@ namespace Open.Genersoft.Component.Logging.Factory
 			module["assembly"] = string.IsNullOrWhiteSpace(config.Assembly) ? DefaultAssembly : config.Assembly;
 			module["logLevel"] = string.IsNullOrWhiteSpace(config.Level) ? DefaultLevel : config.Level;
 			module["timePattern"] = string.IsNullOrWhiteSpace(config.TimePattern) ? DefaultTimePattern : config.TimePattern;
-
+			module["slice"] = config.Slice > 0 ? config.Slice.ToString() : "10.0";
 			return module;
 		}
 
@@ -83,6 +83,7 @@ namespace Open.Genersoft.Component.Logging.Factory
 			logger.Path = module["path"].EndsWith("\\") ? module["path"] : module["path"] + "\\";
 			logger.Level = levelDict[module["logLevel"]];
 			logger.TimePattern = module["timePattern"];
+			logger.Slice = Convert.ToDouble(module["slice"]);
 			return logger;
 		}
 

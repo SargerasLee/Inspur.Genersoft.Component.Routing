@@ -12,6 +12,7 @@ namespace Open.Genersoft.Component.Logging.Facade
 		public string TimePattern { get; set; }
 		public string Path { set; get; }
 		public LogLevel Level { set; get; }
+		public double Slice{ set; get; }
 
 		protected static readonly Dictionary<LogLevel, string> levelDict = new Dictionary<LogLevel, string>
 		{

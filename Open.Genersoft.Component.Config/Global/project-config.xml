@@ -10,15 +10,17 @@
       <Assembly Name="Open.Genersoft.Component.UnitTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
     </Component-Scan>
     <Log>
-      <Type Code="ZJ" Name="资金日志" Path="c:\log\zjlog\" TimePattern="HH : mm : ss : ffffff" Assembly="" Class="" Level="ALL"/>
-      <Type Code="YS" Name="应收日志" Path="c:\log\arlog\" TimePattern="" Assembly="" Class="" Level="DEBUG"/>
+      <Type Code="ZJ" Name="资金日志" Path="c:\log\zjlog\" TimePattern="HH : mm : ss : ffffff" Assembly="" Class="" Level="ALL" Slice="0.001"/>
+      <Type Code="YS" Name="应收日志" Path="c:\log\arlog\" TimePattern="" Assembly="" Class="" Level="DEBUG" Slice="20"/>
     </Log>
   </Modules>
 </Configuration>
 
 <!--Code 日志编号,不要用default，系统已预置，可直接使用-->
 <!--Name 日志名称，给人看-->
-<!--FullPath 日志文件路径，不带文件名-->
+<!--Path 日志文件路径，不带文件名-->
+<!--TimePattern 时间格式-->
 <!--Assembly 程序集强名称，带公钥-->
 <!--Class 类全限定名-->
 <!--Level 日志级别由低到高ALL,TRACE,DEBUG,INFO,WARN,ERROR,FATAL,OFF-->
+<!--Slice 切分大小，单位MB-->

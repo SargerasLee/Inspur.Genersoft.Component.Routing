@@ -16,7 +16,7 @@ namespace Open.Genersoft.Component.Config.Global
 	{
 		public static event ConfigFileChangedEventHandler ConfigFileChanged;
 		private static readonly object obj = new object();
-		private static readonly string PATH = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "zzy\\Global\\project-config.xml";
+		private static readonly string PATH = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "\\Global\\project-config.xml";
 		private static bool flag = false;
 		private static DateTime lastModifyTime = DateTime.MinValue;
 
@@ -53,10 +53,11 @@ namespace Open.Genersoft.Component.Config.Global
 					item.Attributes["Assembly"] == null ? "" : item.Attributes["Assembly"].Value,
 					item.Attributes["Class"] == null ? "" : item.Attributes["Class"].Value,
 					item.Attributes["Level"] == null ? "" : item.Attributes["Level"].Value,
-					item.Attributes["TimePattern"] == null ? "" : item.Attributes["TimePattern"].Value
+					item.Attributes["TimePattern"] == null ? "" : item.Attributes["TimePattern"].Value,
+					item.Attributes["Slice"] == null ? 10.0 : Convert.ToDouble(item.Attributes["Slice"].Value)
 				));
 			}
-			LoggerConfig.Add("default", new LogConfig("", "", "", "", "", "", ""));
+			LoggerConfig.Add("default", new LogConfig("", "", "", "", "", "", "",10.0));
 		}
 
 		private static void PutAssemblies(XmlDocument xd)

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 using Open.Genersoft.Component.Logging.Facade;
 using System;
 using System.Diagnostics;
@@ -15,6 +16,8 @@ namespace Open.Genersoft.Component.Logging.Default
 		private readonly object lockObj = new object();
 		private StreamWriter writer;
 		private readonly string processName;
+		private string currentFile = "";
+		private int num = 0;
 
 		public DefaultLogger()
 		{
@@ -76,15 +79,24 @@ namespace Open.Genersoft.Component.Logging.Default
 
 			try
 			{
-				CreateFileIfNotExists();
+				CreatePathIfNotExists();
 				bool token = false;
 				while(!token)
 					Monitor.TryEnter(lockObj, 100, ref token);
 				if (token)
 				{
 					string date = DateTime.Now.ToString(DatePattern);
-					string file = Path + $"{Name}-Log{date}.txt";
-					using (writer = new StreamWriter(file, true, Encoding.Default))
+					if(!currentFile.Contains(date))
+					{
+						num = 0;
+						currentFile = Path + $"{Name}-Log{date}-part{num}.txt";		
+					}
+					else
+					{
+						SliceFileIfSpill(date);
+					}
+					
+					using (writer = new StreamWriter(currentFile, true, Encoding.Default))
 					{
 						string time = DateTime.Now.ToString(TimePattern);
 						writer.AutoFlush = false;
@@ -136,12 +148,26 @@ namespace Open.Genersoft.Component.Logging.Default
 			Print(Level, desc, sb.ToString());
 		}
 
-		private void CreateFileIfNotExists()
+		private void CreatePathIfNotExists()
 		{
 			if (!Directory.Exists(Path))
 			{
 				Directory.CreateDirectory(Path);
 			}
+		}
+
+		private void SliceFileIfSpill(string date)
+		{
+			if (File.Exists(currentFile))
+			{
+				FileInfo info = new FileInfo(currentFile);
+				if (info.Length > Slice * 1024 * 1024)
+				{
+					num++;
+					currentFile = Path + $"{Name}-Log{date}-part{num}.txt";
+				} 
+			}
+			
 		}
 
 		public override void Fatal(string text, Exception ex = null)
